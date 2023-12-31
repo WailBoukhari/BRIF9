@@ -1,37 +1,43 @@
 <?php
-$title = 'Home';
-// Include necessary files
-require_once __DIR__ . '/model/Database.php'; // Adjust the path based on your project structure
-require_once __DIR__ . '/controller/BusController.php';
-require_once __DIR__ . '/controller/RouteController.php';
-require_once __DIR__ . '/controller/ScheduleController.php';
-require_once __DIR__ . '/view/include/header.php';
-require_once __DIR__ . '/view/include/footer.php';
+include_once __DIR__ . '/app/controllers/AdminController.php';
+include_once __DIR__ . '/app/controllers/HomeController.php';
+include_once __DIR__ . '/app/controllers/BusController.php';
+include_once __DIR__ . '/app/controllers/RouteController.php';
+include_once __DIR__ . '/app/controllers/ScheduleController.php';
+include_once __DIR__ . '/app/controllers/SearchController.php'; // Add SearchController
+include_once __DIR__ . '/app/models/Bus.php';
+include_once __DIR__ . '/app/models/BusDAO.php';
+include_once __DIR__ . '/app/models/Route.php';
+include_once __DIR__ . '/app/models/RouteDAO.php';
+include_once __DIR__ . '/app/models/Schedule.php';
+include_once __DIR__ . '/app/models/ScheduleDAO.php';
 
-// Example: Instantiate controllers
-$busController = new BusController();
-$routeController = new RouteController();
-$scheduleController = new ScheduleController();
-
-// Example: Handle routing
-$action = $_GET['action'] ?? 'index';
-
-switch ($action) {
-    case 'bus':
-        echo $busController->indexBus(); // Update to a specific action method name
-        require_once __DIR__ . '\view\busIndex.php';
-        break;
-    case 'route':
-        echo $routeController->indexRout(); // Update to a specific action method name
-        require_once __DIR__ . '\view\routeIndex.php';
-        break;
-    case 'schedule':
-        echo $scheduleController->indexSchedule(); // Update to a specific action method name
-        require_once __DIR__ . '\view\schedulesIndex.php';
-        break;
-    default:
-        // Your HTML and PHP code for the homepage, including the search form
-        require_once __DIR__ . '\view\home.php';
-
-        break;
+// Routing.
+if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+    switch ($action) {
+        case '/':
+            $controller = new HomeController();
+            $controller->index();
+            break;
+        case 'admin':
+            $controller = new AdminController();
+            $controller->index();
+            break;
+        case 'busindex':
+            $controller = new BusController();
+            $controller->index();
+            break;
+        case 'searchPage':
+            $controller = new SearchController();
+            $controller->index();
+            break;
+        default:
+            $homeController = new HomeController();
+            $homeController->index();
+            break;
+    }
+} else {
+    $homeController = new HomeController();
+    $homeController->index();
 }
