@@ -1,91 +1,66 @@
 <?php
+
 class ScheduleController
 {
-    public function index()
-    {
-        // Example code for displaying a list of schedules
-        $scheduleDAO = new ScheduleDAO();
-        $schedules = $scheduleDAO->getAllSchedules();
+    private $scheduleDAO;
 
-        // Example: Render a view with the list of schedules
-        $this->render('schedule/index', ['schedules' => $schedules]);
+    public function __construct()
+    {
+        $this->scheduleDAO = new ScheduleDAO();
     }
 
-    public function show($id)
+    public function index()
     {
-        // Example code for displaying details of a specific schedule
-        $scheduleDAO = new ScheduleDAO();
-        $schedule = $scheduleDAO->getScheduleById($id);
+        // Retrieve all schedules
+        $schedules = $this->scheduleDAO->getAllSchedules();
 
-        // Example: Render a view with the details of the specific schedule
-        $this->render('schedule/show', ['schedule' => $schedule]);
+        // Pass the data to the view (you may have a specific view for listing schedules)
+        include_once 'app/views/schedule/index.php';
+    }
+
+    public function show($scheduleID)
+    {
+        // Retrieve a specific schedule by ID
+        $schedule = $this->scheduleDAO->getScheduleById($scheduleID);
+
+        // Pass the data to the view (you may have a specific view for displaying a single schedule)
+        include_once 'app/views/schedule/show.php';
     }
 
     public function create()
     {
-        // Example code for displaying a form to create a new schedule
-        // Example: Render a view with a form for creating a new schedule
-        $this->render('schedule/create');
+        // Display the form for creating a new schedule
+        include_once 'app/views/schedule/create.php';
     }
 
-    public function store($data)
+    public function store()
     {
-        // Example code for handling the creation of a new schedule
-        $schedule = new Schedule($data['date'], $data['departureTime'], $data['arrivalTime'], $data['availableSeats']);
-
-        $scheduleDAO = new ScheduleDAO();
-        $scheduleDAO->createSchedule($schedule);
-
-        // Example: Redirect to the list of schedules after creating a new schedule
-        header('Location: /schedules');
+        // Handle the form submission to store a new schedule in the database
+        // This involves creating a new Schedule object and passing it to the addSchedule method in ScheduleDAO
+        // Redirect to the index page or show the newly created schedule
     }
 
-    public function edit($id)
+    public function edit($scheduleID)
     {
-        // Example code for displaying a form to edit a specific schedule
-        $scheduleDAO = new ScheduleDAO();
-        $schedule = $scheduleDAO->getScheduleById($id);
+        // Retrieve a specific schedule by ID to populate the edit form
+        $schedule = $this->scheduleDAO->getScheduleById($scheduleID);
 
-        // Example: Render a view with a form for editing the specific schedule
-        $this->render('schedule/edit', ['schedule' => $schedule]);
+        // Display the form for editing the schedule
+        include_once 'app/views/schedule/edit.php';
     }
 
-    public function update($id, $data)
+    public function update($scheduleID)
     {
-        // Example code for handling the update of a specific schedule
-        $scheduleDAO = new ScheduleDAO();
-        $schedule = $scheduleDAO->getScheduleById($id);
-
-        // Update the schedule object with new data
-        $schedule->setDate($data['date']);
-        $schedule->setDepartureTime($data['departureTime']);
-        $schedule->setArrivalTime($data['arrivalTime']);
-        $schedule->setAvailableSeats($data['availableSeats']);
-
-        $scheduleDAO->updateSchedule($schedule);
-
-        // Example: Redirect to the list of schedules after updating the schedule
-        header('Location: /schedules');
+        // Handle the form submission to update an existing schedule in the database
+        // This involves retrieving the existing schedule, updating its properties, and passing it to the updateSchedule method in ScheduleDAO
+        // Redirect to the index page or show the updated schedule
     }
 
-    public function delete($id)
+    public function destroy($scheduleID)
     {
-        // Example code for handling the deletion of a specific schedule
-        $scheduleDAO = new ScheduleDAO();
-        $schedule = $scheduleDAO->getScheduleById($id);
+        // Delete a schedule by ID
+        $this->scheduleDAO->deleteSchedule($scheduleID);
 
-        $scheduleDAO->deleteSchedule($schedule);
-
-        // Example: Redirect to the list of schedules after deleting the schedule
-        header('Location: /schedules');
-    }
-
-    // You can add more actions/methods as needed for other functionalities
-
-    private function render($view, $data = [])
-    {
-        // Example: Implement your logic to render the view with data
-        // You might use a template engine or any other rendering method here
-        // Example: include 'views/' . $view . '.php';
+        // Redirect to the index page or show a success message
     }
 }

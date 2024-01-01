@@ -1,5 +1,5 @@
 <?php
-$title = "Edit Route";
+$title = "Create Schedule";
 ob_start();
 ?>
 <div class="container mt-5">

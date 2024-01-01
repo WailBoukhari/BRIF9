@@ -18,7 +18,7 @@ class ScheduleDAO extends DatabaseDAO
             $bus = $BusDao->getBusById($row['busID']);
             $route = $RouteDao->getRouteById($row['routeID']);
 
-            $schedules[] = new Schedule($row['scheduleID'], $row['date'], $row['departureTime'], $row['arrivalTime'], $row['availableSeats'], $bus, $route, $row['companyImage']);
+            $schedules[] = new Schedule($row['scheduleID'], $row['date'], $row['departureTime'], $row['arrivalTime'], $row['availableSeats'], $bus, $route, $bus->getCompany()->getCompanyID(), $row['price']);
         }
         return $schedules;
     }
@@ -32,7 +32,7 @@ class ScheduleDAO extends DatabaseDAO
         $RouteDao = new RouteDao();
         $bus = $BusDao->getBusById($result['busID']);
         $route = $RouteDao->getRouteById($result['routeID']);
-        return new Schedule($result['scheduleID'], $result['date'], $result['departureTime'], $result['arrivalTime'], $result['availableSeats'], $bus, $route, $result['companyImage']); // Return null if schedule with given ID is not found
+        return new Schedule($result['scheduleID'], $result['date'], $result['departureTime'], $result['arrivalTime'], $result['availableSeats'], $bus, $route, $result['companyImage'], $result['price']); // Return null if schedule with given ID is not found
     }
     public function addSchedule($schedule)
     {
@@ -128,11 +128,13 @@ class ScheduleDAO extends DatabaseDAO
                 $row['availableSeats'],
                 $bus,
                 $route,
-                $row['companyImage']
+                $row['companyImage'],
+                $row['price']
             );
         }
 
         return $scheduels;
     }
+
 
 }

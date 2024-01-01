@@ -10,14 +10,14 @@ class BusDAO extends DatabaseDAO
     public function getAllBuses()
     {
         $query = "SELECT * FROM Bus";
-        $buses=array();
+        $buses = array();
         $result = $this->fetchAll($query);
         foreach ($result as $row) {
-            $CompanyDao=new CompanyDao();
-            $company=$CompanyDao->getCompanyById($row['companyID']);
+            $CompanyDao = new CompanyDao();
+            $company = $CompanyDao->getCompanyById($row['companyID']);
 
-            $buses[] = new Bus($row['busID'],$row['busNumber'],$row['licensePlate'],$company,$row['capacity']);
-            
+            $buses[] = new Bus($row['busID'], $row['busNumber'], $row['licensePlate'], $company, $row['capacity']);
+
         }
         return $buses;
     }
@@ -26,10 +26,10 @@ class BusDAO extends DatabaseDAO
     {
         $query = "SELECT * FROM Bus WHERE busID = :busID";
         $params = [':busID' => $busID];
-        $result=$this->fetch($query, $params);
-        $CompanyDao=new CompanyDao();
-        $company=$CompanyDao->getCompanyById($result['companyID']);
-        return new Bus($result['busID'],$result['busNumber'],$result['licensePlate'],$company,$result['capacity']);
+        $result = $this->fetch($query, $params);
+        $CompanyDao = new CompanyDao();
+        $company = $CompanyDao->getCompanyById($result['companyID']);
+        return new Bus($result['busID'], $result['busNumber'], $result['licensePlate'], $company, $result['capacity']);
     }
 
     public function addBus($bus)
@@ -58,7 +58,7 @@ class BusDAO extends DatabaseDAO
         $busID = $bus->getBusID();
         $busNumber = $bus->getBusNumber();
         $licensePlate = $bus->getLicensePlate();
-        $companyID = $bus->getCompany()->getCompanyID();
+        $companyID = $bus->getCompany()->getCompanyID(); // Corrected this line
         $capacity = $bus->getCapacity();
 
         $query = "UPDATE Bus SET busNumber = :busNumber, licensePlate = :licensePlate, 
@@ -72,8 +72,9 @@ class BusDAO extends DatabaseDAO
             ':capacity' => $capacity
         ];
 
-        return $this->execute($query, $params);
+        $this->execute($query, $params);
     }
+
 
     public function deleteBus($busID)
     {
