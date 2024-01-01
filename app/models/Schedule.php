@@ -88,7 +88,51 @@ class Schedule
     {
         return $this->price;
     }
+    // setters
+    public function setScheduleID($scheduleID)
+    {
+        $this->scheduleID = $scheduleID;
+    }
 
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    public function setDepartureTime($departureTime)
+    {
+        $this->departureTime = $departureTime;
+    }
+
+    public function setArrivalTime($arrivalTime)
+    {
+        $this->arrivalTime = $arrivalTime;
+    }
+
+    public function setAvailableSeats($availableSeats)
+    {
+        $this->availableSeats = $availableSeats;
+    }
+
+    public function setBusID($bus)
+    {
+        return $this->bus;
+    }
+
+    public function setRouteID($route)
+    {
+        $this->route = $route;
+    }
+
+    public function setCompanyID($companyID)
+    {
+        $this->companyID = $companyID;
+    }
+
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
 
 }
 

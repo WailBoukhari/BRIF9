@@ -83,9 +83,8 @@ if (isset($_GET['action'])) {
             $routeController->edit($_GET['id']);
             break;
         case 'routeupdate':
-            $routeID = $_GET['id'];
             $controller = new RouteController();
-            $controller->update($routeID);
+            $controller->update($_GET['id']);
             break;
         case 'routedelete':
             $controller = new RouteController();

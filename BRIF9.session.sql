@@ -13,7 +13,7 @@ CREATE TABLE City (
 CREATE TABLE Company (
     companyID INT PRIMARY KEY AUTO_INCREMENT,
     companyName VARCHAR(255),
-    img VARCHAR(255)
+    companyImage VARCHAR(255)
 );
 -- Table for Bus
 CREATE TABLE Bus (
@@ -217,17 +217,17 @@ VALUES (3, 4, '180 km', '2:15:00'),
     (25, 1, '180 km', '2:15:00');
 -- Inezgane to Casablanca
 -- Insert companies
-INSERT INTO Company (companyName, img)
-VALUES ('Supratours', "2d.png"),
-    ('SATAS', "2d.png"),
-    ('Autocars Bardia', "2d.png"),
-    ('Autocars Zerktouni', "2d.png"),
-    ('Trans Ghazala', "2d.png"),
-    ('Alsa Maroc', "2d.png"),
-    ('SupraTours Sahara', "2d.png"),
-    ('Kamel Transports', "2d.png"),
-    ('Transavia', "2d.png"),
-    ('Tarik Express', "2d.png");
+INSERT INTO Company (companyName, companyImage)
+VALUES ('Supratours', "1"),
+    ('SATAS', "2"),
+    ('Autocars Bardia', "3"),
+    ('Autocars Zerktouni', "4"),
+    ('Trans Ghazala', "5"),
+    ('Alsa Maroc', "6"),
+    ('SupraTours Sahara', "7"),
+    ('Kamel Transports', "8"),
+    ('Transavia', "9"),
+    ('Tarik Express', "10");
 -- Insert data into the Bus table for buses of the new companies
 INSERT INTO Bus (
         busID,

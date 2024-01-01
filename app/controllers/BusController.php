@@ -38,7 +38,6 @@ class BusController
 
             // Retrieve Company object based on ID
             $company = $this->companyDAO->getCompanyById($companyID);
-            $companies = $this->companyDAO->getAllCompanies();
             // Create a new Bus object
             $bus = new Bus(null, $busNumber, $licensePlate, $company, $capacity);
 
@@ -70,7 +69,7 @@ class BusController
             // Validate and process the form data
             $busNumber = $_POST['busNumber'];
             $licensePlate = $_POST['licensePlate'];
-            $company = $_POST['company'];
+            $companyID = $_POST['company']; // Assuming this is the company ID from the form
             $capacity = $_POST['capacity'];
 
             // Retrieve the existing bus
@@ -79,19 +78,22 @@ class BusController
             // Update its properties
             $existingBus->setBusNumber($busNumber);
             $existingBus->setLicensePlate($licensePlate);
+
+            // Retrieve Company object based on ID
+            $company = $this->companyDAO->getCompanyById($companyID);
+
+            // Set the company for the bus
             $existingBus->setCompany($company);
             $existingBus->setCapacity($capacity);
-
             // Pass the updated bus object to the updateBus method in BusDAO
             $this->busDAO->updateBus($existingBus);
 
             // Redirect to the index page or show the updated bus
-            header("Location: index.php?action=busedit&id={$busID}");
+            header("Location: index.php?action=busindex&id={$busID}");
             exit();
-        } else {
-            // Display an error or redirect to the edit page with a message
         }
     }
+
 
     public function delete($busID)
     {

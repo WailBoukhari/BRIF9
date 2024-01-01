@@ -27,8 +27,11 @@ class BusDAO extends DatabaseDAO
         $query = "SELECT * FROM Bus WHERE busID = :busID";
         $params = [':busID' => $busID];
         $result = $this->fetch($query, $params);
-        $CompanyDao = new CompanyDao();
-        $company = $CompanyDao->getCompanyById($result['companyID']);
+
+        // Assuming you have a CompanyDAO and a Company class
+        $companyDAO = new CompanyDAO();
+        $company = $companyDAO->getCompanyById($result['companyID']);
+
         return new Bus($result['busID'], $result['busNumber'], $result['licensePlate'], $company, $result['capacity']);
     }
 
@@ -58,7 +61,7 @@ class BusDAO extends DatabaseDAO
         $busID = $bus->getBusID();
         $busNumber = $bus->getBusNumber();
         $licensePlate = $bus->getLicensePlate();
-        $companyID = $bus->getCompany()->getCompanyID(); // Corrected this line
+        $companyID = $bus->getCompanyID(); // This line is causing the issue
         $capacity = $bus->getCapacity();
 
         $query = "UPDATE Bus SET busNumber = :busNumber, licensePlate = :licensePlate, 

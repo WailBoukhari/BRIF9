@@ -38,8 +38,7 @@ class Bus
 
     public function getCompanyID()
     {
-
-        return $this->company->getCompanyID();
+        return $this->company ? $this->company->getCompanyID() : null;
     }
     public function getCompanyName()
     {
@@ -70,4 +69,5 @@ class Bus
     {
         $this->capacity = $capacity;
     }
+
 }

@@ -32,7 +32,17 @@ class ScheduleDAO extends DatabaseDAO
         $RouteDao = new RouteDao();
         $bus = $BusDao->getBusById($result['busID']);
         $route = $RouteDao->getRouteById($result['routeID']);
-        return new Schedule($result['scheduleID'], $result['date'], $result['departureTime'], $result['arrivalTime'], $result['availableSeats'], $bus, $route, $result['companyImage'], $result['price']); // Return null if schedule with given ID is not found
+        return new Schedule(
+            $result['scheduleID'],
+            $result['date'],
+            $result['departureTime'],
+            $result['arrivalTime'],
+            $result['availableSeats'],
+            $bus,
+            $route,
+            isset($result['companyImage']) ? $result['companyImage'] : null,
+            $result['price']
+        );
     }
     public function addSchedule($schedule)
     {
@@ -64,8 +74,8 @@ class ScheduleDAO extends DatabaseDAO
         $departureTime = $schedule->getDepartureTime();
         $arrivalTime = $schedule->getArrivalTime();
         $availableSeats = $schedule->getAvailableSeats();
-        $bus = $schedule->getBus()->getBusID();
-        $route = $schedule->getRoute()->getRouteID();
+        $busID = $schedule->getBus()->getBusID();
+        $routeID = $schedule->getRoute()->getRouteID();
 
         $query = "UPDATE Schedule SET date = :date, departureTime = :departureTime, 
                   arrivalTime = :arrivalTime, availableSeats = :availableSeats, 
@@ -77,12 +87,13 @@ class ScheduleDAO extends DatabaseDAO
             ':departureTime' => $departureTime,
             ':arrivalTime' => $arrivalTime,
             ':availableSeats' => $availableSeats,
-            ':busID' => $bus,
-            ':routeID' => $route
+            ':busID' => $busID, // This is causing the error
+            ':routeID' => $routeID
         ];
 
         return $this->execute($query, $params);
     }
+
 
     public function deleteSchedule($scheduleID)
     {
@@ -93,7 +104,7 @@ class ScheduleDAO extends DatabaseDAO
     }
     public function getScheduelByEndCityStartCity($date, $endCity, $startCity, $places)
     {
-        $query = "SELECT Schedule.*, Route.*, Company.img AS companyImage
+        $query = "SELECT Schedule.*, Route.*, Company.companyImage AS companyImage
         FROM Schedule
         INNER JOIN Route ON Schedule.routeID = Route.routeID
         INNER JOIN Bus ON Schedule.busID = Bus.busID

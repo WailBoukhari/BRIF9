@@ -7,7 +7,7 @@ ob_start();
     <h1>Schedule List</h1>
 
     <!-- Add a link to create a new schedule -->
-    <a href="/schedule/create" class="btn btn-primary mb-3">Add New Schedule</a>
+    <a href="index.php?action=schedulecreate" class="btn btn-primary mb-3">Add New Schedule</a>
 
     <?php if (!empty($schedules)): ?>
         <table class="table">
@@ -43,16 +43,17 @@ ob_start();
                         <td>
                             <?= $schedule->getAvailableSeats() ?>
                         </td>
-
                         <td>
                             <?= $schedule->getBus()->getBusID() ?>
                         </td>
                         <td>
-                            <?= $schedule->getRoute()->getRouteID() ?>
+                            <?= $schedule->getRoute()->getStartCityName() ?> to
+                            <?= $schedule->getRoute()->getEndCityName() ?>
                         </td>
                         <td>
 
-                            <img src=" <?= $schedule->getCompanyImageByID($schedule->getCompanyID()) ?>" alt="">
+                            <img src=" <?= $schedule->getCompanyImageByID($schedule->getCompanyID()) ?>"
+                                alt="<?= $schedule->getCompanyImageByID($schedule->getCompanyID()) ?>">
 
                         </td>
                         <td>
@@ -60,8 +61,10 @@ ob_start();
                         </td>
                         <td>
                             <!-- Add links to edit and delete each schedule -->
-                            <a href="/schedule/edit/<?= $schedule->getScheduleID() ?>" class="btn btn-warning">Edit</a>
-                            <a href="/schedule/delete/<?= $schedule->getScheduleID() ?>" class="btn btn-danger">Delete</a>
+                            <a href="index.php?action=scheduleedit&id=<?= $schedule->getScheduleID() ?>"
+                                class="btn btn-warning">Edit</a>
+                            <a href="index.php?action=scheduledelete&id=<?= $schedule->getScheduleID() ?>"
+                                class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
