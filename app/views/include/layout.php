@@ -11,14 +11,15 @@
     <title>
         <?= $title ?>
     </title>
+    <link rel="stylesheet" href="public/css/style.css">
 </head>
 
 <body>
     <?php require_once 'navbar.php' ?>
-    <div class="container mt-2">
-        <hr>
-        <?= $content ?>
-    </div>
+
+
+    <?= $content ?>
+
 </body>
 
 </html>
