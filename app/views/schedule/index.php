@@ -50,10 +50,11 @@ ob_start();
                             <?= $schedule->getRoute()->getStartCityName() ?> to
                             <?= $schedule->getRoute()->getEndCityName() ?>
                         </td>
+
                         <td>
 
-                            <img src=" <?= $schedule->getCompanyImageByID($schedule->getCompanyID()) ?>"
-                                alt="<?= $schedule->getCompanyImageByID($schedule->getCompanyID()) ?>">
+                            <img style="width: 7rem;" src=" <?= $schedule->getCompanyImageByID($schedule->getCompanyID()) ?>"
+                                alt=" <?= $schedule->getCompanyImageByID($schedule->getCompanyID()) ?>">
 
                         </td>
                         <td>

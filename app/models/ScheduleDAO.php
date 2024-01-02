@@ -43,6 +43,7 @@ class ScheduleDAO extends DatabaseDAO
             isset($result['companyImage']) ? $result['companyImage'] : null,
             $result['price']
         );
+
     }
     public function addSchedule($schedule)
     {
@@ -74,8 +75,8 @@ class ScheduleDAO extends DatabaseDAO
         $departureTime = $schedule->getDepartureTime();
         $arrivalTime = $schedule->getArrivalTime();
         $availableSeats = $schedule->getAvailableSeats();
-        $busID = $schedule->getBus()->getBusID();
-        $routeID = $schedule->getRoute()->getRouteID();
+        $busID = $schedule->getBusID();
+        $routeID = $schedule->getRouteID();
 
         $query = "UPDATE Schedule SET date = :date, departureTime = :departureTime, 
                   arrivalTime = :arrivalTime, availableSeats = :availableSeats, 
@@ -87,13 +88,12 @@ class ScheduleDAO extends DatabaseDAO
             ':departureTime' => $departureTime,
             ':arrivalTime' => $arrivalTime,
             ':availableSeats' => $availableSeats,
-            ':busID' => $busID, // This is causing the error
+            ':busID' => $busID,
             ':routeID' => $routeID
         ];
 
         return $this->execute($query, $params);
     }
-
 
     public function deleteSchedule($scheduleID)
     {

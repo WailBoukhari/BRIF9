@@ -42,6 +42,7 @@ class ScheduleController
             $availableSeats = $_POST['availableSeats'];
             $busID = $_POST['bus'];
             $routeID = $_POST['route'];
+            $companyID = $_POST['company'];
             $price = $_POST['price'];
 
             // Retrieve the selected bus and route based on IDs
@@ -49,7 +50,7 @@ class ScheduleController
             $selectedRoute = $this->routeDAO->getRouteById($routeID);
 
             // Create a new Schedule object
-            $schedule = new Schedule(null, $date, $departureTime, $arrivalTime, $availableSeats, $selectedBus, $selectedRoute, $price);
+            $schedule = new Schedule(null, $date, $departureTime, $arrivalTime, $availableSeats, $selectedBus, $selectedRoute, $companyID, $price);
 
             // Pass the Schedule object to the addSchedule method in ScheduleDAO
             $this->scheduleDAO->addSchedule($schedule);
@@ -104,12 +105,13 @@ class ScheduleController
             $this->scheduleDAO->updateSchedule($existingSchedule);
 
             // Redirect to the index page or show the updated schedule
-            header("Location: index.php?action=scheduleedit&id={$scheduleID}");
+            header("Location: index.php?action=scheduleindex");
             exit();
         } else {
             // Display an error or redirect to the edit page with a message
         }
     }
+
     public function delete($scheduleID)
     {
         // Retrieve a specific schedule by ID to confirm deletion

@@ -84,7 +84,9 @@ class BusController
 
             // Set the company for the bus
             $existingBus->setCompany($company);
+
             $existingBus->setCapacity($capacity);
+
             // Pass the updated bus object to the updateBus method in BusDAO
             $this->busDAO->updateBus($existingBus);
 

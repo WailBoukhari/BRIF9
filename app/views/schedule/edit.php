@@ -34,10 +34,12 @@ ob_start();
         </div>
 
         <select class="form-select" id="bus" name="bus" required>
+            <label for="availableSeats" class="form-label">Bus Number</label>
+
             <?php foreach ($buses as $bus): ?>
-            <option value="<?= $bus->getBusID() ?>">
-                <?= htmlspecialchars($bus->getBusNumber()) ?>
-            </option>
+                <option value="<?= $bus->getBusID() ?>">
+                    <?= htmlspecialchars($bus->getBusNumber()) ?>
+                </option>
             <?php endforeach; ?>
         </select>
 
@@ -45,26 +47,15 @@ ob_start();
             <label for="route" class="form-label">Route</label>
             <select class="form-select" id="route" name="route" required>
                 <?php foreach ($routes as $route): ?>
-                <option value="<?= $route->getRouteID() ?>"
-                    <?= ($route->getRouteID() == $schedule->getRoute()->getRouteID()) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($route->getStartCityName()) ?> to
-                    <?= htmlspecialchars($route->getEndCityName()) ?>
-                </option>
+                    <option value="<?= $route->getRouteID() ?>"
+                        <?= ($route->getRouteID() == $schedule->getRoute()->getRouteID()) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($route->getStartCityName()) ?> to
+                        <?= htmlspecialchars($route->getEndCityName()) ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
         </div>
 
-        <div class="mb-3">
-            <label for="company" class="form-label">Company</label>
-            <select class="form-select" id="company" name="company" required>
-                <?php foreach ($companies as $company): ?>
-                <option value="<?= $company->getCompanyID() ?>"
-                    <?= ($company->getCompanyID() == $schedule->getCompanyID()) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($company->getCompanyName()) ?>
-                </option>
-                <?php endforeach; ?>
-            </select>
-        </div>
 
         <div class="mb-3">
             <label for="price" class="form-label">Price</label>

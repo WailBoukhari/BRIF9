@@ -218,16 +218,16 @@ VALUES (3, 4, '180 km', '2:15:00'),
 -- Inezgane to Casablanca
 -- Insert companies
 INSERT INTO Company (companyName, companyImage)
-VALUES ('Supratours', "1"),
-    ('SATAS', "2"),
-    ('Autocars Bardia', "3"),
-    ('Autocars Zerktouni', "4"),
-    ('Trans Ghazala', "5"),
-    ('Alsa Maroc', "6"),
-    ('SupraTours Sahara', "7"),
-    ('Kamel Transports', "8"),
-    ('Transavia', "9"),
-    ('Tarik Express', "10");
+VALUES ('Supratours', "bus.jpg"),
+    ('SATAS', "bus.jpg"),
+    ('CTM', "bus.jpg"),
+    ('Tramesa', "bus.jpg"),
+    ('Trans Ghazala', "bus.jpg"),
+    ('Voyages Ennajah', "bus.jpg"),
+    ('Rakar', "bus.jpg"),
+    ('Kamel Transports', "bus.jpg"),
+    ('Transavia', "bus.jpg"),
+    ('Tarik Express', "bus.jpg");
 -- Insert data into the Bus table for buses of the new companies
 INSERT INTO Bus (
         busID,
@@ -456,7 +456,7 @@ VALUES (
         10,
         28.00
     );
--- Insert schedules for Autocars Bardia (CompanyID = 3)
+-- Insert schedules for CTM (CompanyID = 3)
 INSERT INTO Schedule (
         date,
         departureTime,
@@ -556,7 +556,7 @@ VALUES (
         10,
         20.00
     );
--- Insert schedules for Autocars Zerktouni (CompanyID = 4)
+-- Insert schedules for Tramesa (CompanyID = 4)
 INSERT INTO Schedule (
         date,
         departureTime,
@@ -756,7 +756,7 @@ VALUES (
         10,
         25.00
     );
--- Insert schedules for Alsa Maroc (CompanyID = 6)
+-- Insert schedules for Voyages Ennajah (CompanyID = 6)
 INSERT INTO Schedule (
         date,
         departureTime,
@@ -856,7 +856,7 @@ VALUES (
         10,
         30.00
     );
--- Insert schedules for SupraTours Sahara (CompanyID = 7)
+-- Insert schedules for Rakar (CompanyID = 7)
 INSERT INTO Schedule (
         date,
         departureTime,

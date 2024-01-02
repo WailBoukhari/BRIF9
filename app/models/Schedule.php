@@ -66,6 +66,7 @@ class Schedule
     public function getBus()
     {
         return $this->bus;
+
     }
 
     public function getRoute()
@@ -116,7 +117,7 @@ class Schedule
 
     public function setBusID($bus)
     {
-        return $this->bus;
+        $this->bus = $bus;
     }
 
     public function setRouteID($route)
