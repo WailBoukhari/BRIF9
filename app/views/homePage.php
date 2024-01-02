@@ -15,9 +15,9 @@ ob_start();
                                     <select class="form-control" name="departureCity" id="departureCity">
                                         <!-- Populate with dynamic data from your database -->
                                         <?php foreach ($Cites->getAllCities() as $city): ?>
-                                            <option value="<?= $city->getCityID() ?>">
-                                                <?= $city->getCityName() . $city->getCityID() ?>
-                                            </option>
+                                        <option value="<?= $city->getCityID() ?>">
+                                            <?= $city->getCityName() ?>
+                                        </option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
@@ -29,9 +29,9 @@ ob_start();
                                     <select class="form-control" name="arrivalCity" id="arrivalCity">
                                         <!-- Populate with dynamic data from your database -->
                                         <?php foreach ($Cites->getAllCities() as $city): ?>
-                                            <option value="<?= $city->getCityID() ?>">
-                                                <?= $city->getCityName() . $city->getCityID() ?>
-                                            </option>
+                                        <option value="<?= $city->getCityID() ?>">
+                                            <?= $city->getCityName() ?>
+                                        </option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
