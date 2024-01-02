@@ -17,7 +17,7 @@ CREATE TABLE Company (
 );
 -- Table for Bus
 CREATE TABLE Bus (
-    busID INT PRIMARY KEY AUTO_INCREMENT,
+    busID INT PRIMARY KEY,
     busNumber INT,
     licensePlate VARCHAR(255),
     companyID INT,
@@ -218,16 +218,16 @@ VALUES (3, 4, '180 km', '2:15:00'),
 -- Inezgane to Casablanca
 -- Insert companies
 INSERT INTO Company (companyName, companyImage)
-VALUES ('Supratours', "bus.jpg"),
-    ('SATAS', "bus.jpg"),
-    ('CTM', "bus.jpg"),
-    ('Tramesa', "bus.jpg"),
-    ('Trans Ghazala', "bus.jpg"),
-    ('Voyages Ennajah', "bus.jpg"),
-    ('Rakar', "bus.jpg"),
-    ('Kamel Transports', "bus.jpg"),
-    ('Transavia', "bus.jpg"),
-    ('Tarik Express', "bus.jpg");
+VALUES ('CTM', "imgs/ctm.jpg"),
+    ('TajVoyage', "imgs/taj.jpg"),
+    ('Bismi Allah Salama', "imgs/bismilah.jpg"),
+    ('SAT First', "imgs/SAT_First.jpg"),
+    ('Trans Ghazala', "imgs/ghazala.jpg"),
+    ('Sotram', 'imgs/sotram.jpg'),
+    ('Bab Allah', 'imgs/BabAllah.jpg'),
+    ('GloBus Trans', 'imgs/GloBus.jpg'),
+    ('Supratours', 'imgs/Supratours.jpg'),
+    ('Jana Viajes', 'imgs/JanaViajes.jpg');
 -- Insert data into the Bus table for buses of the new companies
 INSERT INTO Bus (
         busID,
